@@ -3,9 +3,10 @@ package com.example.activities;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
-import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.Toast;
 
 import androidx.annotation.Nullable;
@@ -29,18 +30,21 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        RadioButton email = findViewById(R.id.email);
-        RadioButton telefono = findViewById(R.id.telefono);
-
+        RadioGroup group = findViewById(R.id.group);
         Button action = findViewById(R.id.action);
 
         action.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(MainActivity.this, );
-                if(email.isChecked()) {
-
+                Intent intent = new Intent(MainActivity.this, ActionActivity.class);
+                int buttonId = group.getCheckedRadioButtonId();
+                Log.i("ACTION", buttonId + "");
+                if (buttonId == R.id.email) {
+                    intent.setAction("email");
+                } else if (buttonId == R.id.telefono) {
+                    intent.setAction("telefono");
                 }
+                startActivity(intent);
             }
         });
     }
